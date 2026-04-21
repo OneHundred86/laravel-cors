@@ -1,0 +1,27 @@
+{
+    "name": "oh86/laravel-cors",
+    "description": "cors for laravel",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Oh86\\LaravelCors\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "chengj",
+            "email": "chen.gj@qq.com"
+        }
+    ],
+    "require-dev": {
+        "laravel/framework": "*"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Oh86\\LaravelCors\\CorsServiceProvider"
+            ]
+        }
+    }
+}
