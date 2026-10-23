@@ -42,3 +42,21 @@ Route::match(['get', 'options'], 'cors/demo1', [CorsController::class, 'demo1'])
 Route::any('cors/demo2', [CorsController::class, 'demo2'])->middleware(EnableCors::class);
 
 ```
+
+
+## 四、注意
+
+为了让`EnableCors`中间件能优先运行，建议提高它的优先级
+
+`app/Http/Kernel.php`
+
+```php
+class Kernel extends HttpKernel
+{
+    protected $middlewarePriority = [
+        \Oh86\LaravelCors\Middlewares\EnableCors::class,  // 放在业务处理中间件前面（或者无脑放到第一位也可以）
+        // 
+        // ...
+    ];
+}
+```
