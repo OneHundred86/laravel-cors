@@ -14,7 +14,7 @@ php artisan vendor:publish --provider='Oh86\LaravelCors\CorsServiceProvider'
 ```dotenv
 # cors
 # 域名支持精准配置，也支持正则表达式(需要携带分割符)配置
-CORS_ALLOWED_ORIGINS=http://a.laravel8.local,#http://.*\.laravel8\.local$#
+CORS_ALLOWED_ORIGINS='http://a.laravel8.local,#http://.*\.laravel8\.local$#'
 CORS_ALLOWED_CREDENTIALS=true
 CORS_MAX_AGE=7200
 
