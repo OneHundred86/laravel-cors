@@ -13,10 +13,20 @@ php artisan vendor:publish --provider='Oh86\LaravelCors\CorsServiceProvider'
 
 ```dotenv
 # cors
-CORS_ALLOWED_ORIGINS=http://a.laravel8.local,http://b.laravel8.local
+# 域名支持精准配置，也支持正则表达式(需要携带分割符)配置
+CORS_ALLOWED_ORIGINS=http://a.laravel8.local,#http://.*\.laravel8\.local$#
 CORS_ALLOWED_CREDENTIALS=true
 CORS_MAX_AGE=7200
 
+```
+
+`config/cors.php` 中的 `allowed_origins` 支持混合配置完整 Origin 和带分隔符的 PHP 正则表达式。建议使用 `^`、`$` 限定整个 Origin：
+
+```php
+'allowed_origins' => [
+    'https://example.com',
+    '#^https://[a-z0-9-]+\.example\.com$#',
+],
 ```
 
 ## 三、使用示例

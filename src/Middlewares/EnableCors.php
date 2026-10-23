@@ -22,7 +22,7 @@ class EnableCors
     /**
      * Handle an incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  Request  $request
      * @param  \Closure  $next
      * @return mixed
      */
@@ -59,16 +59,19 @@ class EnableCors
     private function shouldRun($request)
     {
         $origin = $request->header('origin');
-        // \Log::debug(__METHOD__, [
-        //     'uri' => $request->getRequestUri(),
-        //     'origin' => $origin,
-        //     'referer' => $request->header('referer'),
-        // ]);
 
         // 跨域
         if ($origin) {
+            // 支持精准匹配
             if (in_array($origin, $this->config['allowed_origins'])) {
                 return true;
+            }
+
+            foreach ($this->config['allowed_origins'] as $allowedOrigin) {
+                // 支持带分隔符（/、#、~等）的正则表达式，普通域名或无效正则不参与正则匹配。
+                if (@preg_match($allowedOrigin, $origin) === 1) {
+                    return true;
+                }
             }
         }
 
